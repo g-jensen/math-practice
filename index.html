@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>math</title>
+</head>
+<body>
+    <div id="math">
+
+    </div>
+    <div>
+        <div class="center">
+            <h1 id="questionLabel">[question label]</h1>
+        </div>
+        <div class="center">
+            <h1 id="timer" style="font-size: 100%;">Timer: 0.0s; Prev: 0.0s</h1>
+        </div>
+        <div class="center">
+            <h1 id="winloss" style="font-size: 100%;">Correct: 0; Incorrect: 0</h1>
+        </div>
+        <div class="center">
+            <h1 id="questionContent" style="font-size: 300%; margin-top: -10px;">[question]</h1>
+        </div>
+
+        <div class="center" style="margin-top: -40px;">
+            <h1 id="answers_a">A.</h1>
+        </div>
+        <div class="center" style="margin-top: -40px;">
+            <h1 id="answers_b">B.</h1>
+        </div>
+        <div class="center" style="margin-top: -40px;">
+            <h1 id="answers_c">C.</h1>
+        </div>
+        <div class="center" style="margin-top: -40px;">
+            <h1 id="answers_d">D.</h1>
+        </div>
+
+        <div id="choices" class="container" style="display: grid;">
+            <button id="A" onclick="QuestionManager.Pick('a')" class="box">A</button>
+            <button id="B" onclick="QuestionManager.Pick('b')" class="box">B</button>
+            <button id="C" onclick="QuestionManager.Pick('c')" class="box">C</button>
+            <button id="D" onclick="QuestionManager.Pick('d')" class="box">D</button>
+        </div>
+    </div>
+    
+</body>
+</html>
+<script src="js/main.js"></script>
