@@ -1,3 +1,5 @@
+/// <reference path="references.ts"/>
+
 class ComplexNumberFraction {
     numerator: ComplexNumber;
     denominator: ComplexNumber;

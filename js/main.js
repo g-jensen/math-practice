@@ -13,6 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+/// <reference path="references.ts"/>
 var ComplexNumber = /** @class */ (function () {
     function ComplexNumber(a, b) {
         this.a = a;
@@ -46,6 +47,7 @@ var ComplexNumber = /** @class */ (function () {
     };
     return ComplexNumber;
 }());
+/// <reference path="references.ts"/>
 var ComplexNumberFraction = /** @class */ (function () {
     function ComplexNumberFraction(c1, c2) {
         this.numerator = c1;
@@ -84,6 +86,9 @@ var _Math = /** @class */ (function () {
         var output = new ComplexNumberFraction(_Math.ComplexMult(c1, conj), new ComplexNumber((c2.a * c2.a) + (c2.b * c2.b), 0));
         return output;
     };
+    _Math.ComplexModulus = function (c1) {
+        return "\u221A" + ((c1.a * c1.a) + (c1.b * c1.b));
+    };
     _Math.AreModZero = function (a, n) {
         for (var index = 0; index < a.length; index++) {
             var element = a[index];
@@ -115,6 +120,7 @@ var _Math = /** @class */ (function () {
     };
     return _Math;
 }());
+/// <reference path="references.ts"/>
 var Question = /** @class */ (function () {
     function Question() {
     }
@@ -136,6 +142,7 @@ var Question = /** @class */ (function () {
     };
     return Question;
 }());
+/// <reference path="references.ts"/>
 var ComplexMultQuestion = /** @class */ (function (_super) {
     __extends(ComplexMultQuestion, _super);
     function ComplexMultQuestion() {
@@ -197,6 +204,7 @@ var ComplexMultQuestion = /** @class */ (function (_super) {
     };
     return ComplexMultQuestion;
 }(Question));
+/// <reference path="references.ts"/>
 var ComplexDivideQuestion = /** @class */ (function (_super) {
     __extends(ComplexDivideQuestion, _super);
     function ComplexDivideQuestion() {
@@ -261,6 +269,47 @@ var ComplexDivideQuestion = /** @class */ (function (_super) {
     return ComplexDivideQuestion;
 }(Question));
 /// <reference path="references.ts"/>
+var ComplexModulusQuestion = /** @class */ (function (_super) {
+    __extends(ComplexModulusQuestion, _super);
+    function ComplexModulusQuestion() {
+        var _this = _super.call(this) || this;
+        var c1 = new ComplexNumber(_Math.GetRandomInt(-10, 10), _Math.GetRandomInt(-10, 10));
+        _this.content = "If z = " + c1.toString() + ", then |z| = ?";
+        _this.answer = _Math.ComplexModulus(c1);
+        QuestionManager.questionNumber++;
+        _this.SetOptions(c1);
+        return _this;
+    }
+    ComplexModulusQuestion.prototype.SetOptions = function (c1) {
+        var funcs = [
+            ComplexModulusQuestion.FauxComplexModulus1(c1).toString(),
+            ComplexModulusQuestion.FauxComplexModulus2(c1).toString(),
+            ComplexModulusQuestion.FauxComplexModulus3(c1).toString(),
+            ComplexModulusQuestion.FauxComplexModulus4(c1).toString(),
+        ];
+        funcs = _Math.ShuffleArray(funcs);
+        funcs.splice(_Math.GetRandomInt(0, 4), 0, this.answer);
+        console.log(this.answer);
+        this.optionA = "A. " + funcs[0];
+        this.optionB = "B. " + funcs[1];
+        this.optionC = "C. " + funcs[2];
+        this.optionD = "D. " + funcs[3];
+    };
+    ComplexModulusQuestion.FauxComplexModulus1 = function (c1) {
+        return "\u221A" + ((c1.a * c1.a) - (c1.b * c1.b));
+    };
+    ComplexModulusQuestion.FauxComplexModulus2 = function (c1) {
+        return "\u221A" + ((c1.a * c1.b) + (c1.b * c1.b));
+    };
+    ComplexModulusQuestion.FauxComplexModulus3 = function (c1) {
+        return "\u221A" + ((c1.a * c1.b) - (c1.b * c1.b));
+    };
+    ComplexModulusQuestion.FauxComplexModulus4 = function (c1) {
+        return "\u221A" + ((c1.a * c1.a) + (c1.a * c1.b));
+    };
+    return ComplexModulusQuestion;
+}(Question));
+/// <reference path="references.ts"/>
 var QuestionManager = /** @class */ (function () {
     function QuestionManager() {
     }
@@ -268,12 +317,13 @@ var QuestionManager = /** @class */ (function () {
         var rand = Math.random() < 0.5;
         // division notation doesnt work unless on firefox so disable for now...
         //var rand = true;
-        if (rand) {
-            this.question = new ComplexMultQuestion();
-        }
-        else {
-            this.question = new ComplexDivideQuestion();
-        }
+        var questionTypes = [
+            new ComplexMultQuestion(),
+            new ComplexDivideQuestion(),
+            new ComplexModulusQuestion()
+        ];
+        var question = _Math.GetRandomInt(0, questionTypes.length);
+        this.question = questionTypes[question];
         document.getElementById("winloss").innerHTML = "Correct: " + this.correctCount + "; Incorrect: " + this.incorrectCount;
         this.question.FillQuestion();
         this.question.FillOptions();
@@ -312,6 +362,7 @@ var Timer = /** @class */ (function () {
 /// <reference path="Question.ts"/>
 /// <reference path="ComplexMultQuestion.ts"/>
 /// <reference path="ComplexDivideQuestion.ts"/>
+/// <reference path="ComplexModulusQuestion.ts"/>
 /// <reference path="QuestionManager.ts"/>
 /// <reference path="Timer.ts"/>
 /// <reference path="references.ts"/>

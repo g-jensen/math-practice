@@ -1,3 +1,5 @@
+/// <reference path="references.ts"/>
+
 class Question {
     content: string;
     answer: string;

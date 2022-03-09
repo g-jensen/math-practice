@@ -4,5 +4,6 @@
 /// <reference path="Question.ts"/>
 /// <reference path="ComplexMultQuestion.ts"/>
 /// <reference path="ComplexDivideQuestion.ts"/>
+/// <reference path="ComplexModulusQuestion.ts"/>
 /// <reference path="QuestionManager.ts"/>
 /// <reference path="Timer.ts"/>

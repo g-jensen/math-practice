@@ -27,6 +27,9 @@ class _Math {
         );
         return output;
     }
+    static ComplexModulus(c1: ComplexNumber): string {
+        return `√${(c1.a * c1.a) + (c1.b * c1.b)}`;
+    }
     static AreModZero(a: Array<number>,n: number): boolean {
         for (let index = 0; index < a.length; index++) {
             const element = a[index];

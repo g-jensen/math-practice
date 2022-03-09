@@ -1,3 +1,5 @@
+/// <reference path="references.ts"/>
+
 class ComplexNumber {
     a: number;
     b: number;

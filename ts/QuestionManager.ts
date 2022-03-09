@@ -9,11 +9,13 @@ class QuestionManager {
         var rand = Math.random() < 0.5;
         // division notation doesnt work unless on firefox so disable for now...
         //var rand = true;
-        if (rand) {
-            this.question = new ComplexMultQuestion();
-        } else {
-            this.question = new ComplexDivideQuestion();
-        }
+        var questionTypes: Array<Question> = [
+            new ComplexMultQuestion(), 
+            new ComplexDivideQuestion(),
+            new ComplexModulusQuestion()
+        ];
+        var question = _Math.GetRandomInt(0,questionTypes.length);
+        this.question = questionTypes[question];
 
         document.getElementById("winloss").innerHTML = `Correct: ${this.correctCount}; Incorrect: ${this.incorrectCount}`;
 

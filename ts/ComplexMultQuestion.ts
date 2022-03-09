@@ -1,3 +1,5 @@
+/// <reference path="references.ts"/>
+
 class ComplexMultQuestion extends Question {
     content: string;
     answer: string;
